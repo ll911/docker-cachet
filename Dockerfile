@@ -1,6 +1,5 @@
 FROM debian:jessie
-
-MAINTAINER Alt Three <support@alt-three.com>
+MAINTAINER leo.lou@gov.bc.ca
 
 # Using debian packages instead of compiling from scratch
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -37,8 +36,9 @@ COPY docker/crontab /etc/cron.d/artisan-schedule
 
 RUN chmod 0644 /etc/cron.d/artisan-schedule &&\
     touch /var/log/cron.log &&\
-    chown www-data /var/www/html/.env
+    chown -R www-data /var/www/html/.env
 
+USER www-data
 VOLUME /var/www
 EXPOSE 8000
 
